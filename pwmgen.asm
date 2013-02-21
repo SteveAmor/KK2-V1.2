@@ -207,7 +207,7 @@ pwm57:
 	;this part transfers and conditions the OutN values to the 16bit registers ONH:ONL
 
 
-;call DebugCU
+;call DebugCU		;DEBUG
 
 
 
@@ -252,7 +252,7 @@ pwm57:
 	mov O8H, xh
 		
 
-;cbi OutputPin8		;OBS DEBUG
+	;cbi OutputPin8		;OBS DEBUG
 
 
 	;generate the end of the PWM signal, this part is blocking.

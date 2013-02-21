@@ -109,8 +109,8 @@ cpp14:	rjmp cpp11
 
 cpp1:	.db "Roll (Ail)  :", 0
 cpp2:	.db "Pitch (Ele) :", 0
-cpp3:	.db "Yaw (Rud)   :", 0
-cpp4:	.db "Throttle    :", 0
+cpp3:	.db "Throttle    :", 0
+cpp4:	.db "Yaw (Rud)   :", 0
 cpp5:	.db "AUX         :", 0
 cpp6:	.db "BACK PREV NEXT CHANGE", 0
 

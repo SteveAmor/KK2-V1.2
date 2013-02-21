@@ -287,7 +287,7 @@ rx17:	rvsetflagfalse flagThrottleZero
 
 	rcall Xabs			;X = ABS(X)
 
-	ldz 2875			;X = X - 2875
+	ldz 2875			;X = X - 2875 (1.15ms)
 	sub xl, zl
 	sbc xh, zh
 
@@ -298,7 +298,7 @@ rx17:	rvsetflagfalse flagThrottleZero
 
 	rjmp rx30			;yes, set to zero
 
-gt8m8:	ldz 3000			;X > 3000?
+gt8m8:	ldz 3125			;X > 3125? (1.25ms)
 	cp  xl, zl
 	cpc xh, zh
 	brlt gt7m2
@@ -444,16 +444,16 @@ GetCppmChannel:
 
 gt1m1:	rcall Xabs	;X = ABS(X)
 
-	ldz 3750	;X = X - 3750
+	ldz 3750	;X = X - 3750 (1.5ms)
 	sub xl, zl
 	sbc xh, zh
 
-	ldz -1500	;X < -1500?
+	ldz -1750	;X < -1750?  (0.7ms)
 	cp  xl, zl
 	cpc xh, zh
 	brlt gt1m2
 
-	ldz 1500	;X > 1500?
+	ldz 1750	;X > 1750?
 	cp  xl, zl
 	cpc xh, zh
 	brge gt1m2

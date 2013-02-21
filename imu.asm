@@ -14,69 +14,78 @@ Imu:	;--- Get Sensor Data ---
 	b16add AccY, AccY, AccTrimRoll
 
 
-	;--- Calculate Tilt Angle ---
-/*
-	b16mov Temp, GyroRoll				;calculate tilt angle with the gyro 
-	b16fdiv Temp, 4
-	b16sub GyroAngleRoll, GyroAngleRoll, Temp
+	;---  calculate tilt angle with the acc. (this approximation is good to about 20 degrees) --
 
-	b16mov Temp, GyroPitch
-	b16fdiv Temp, 4
-	b16sub GyroAnglePitch, GyroAnglePitch, Temp
-
-	b16ldi Temper, 8340				;wrap angles at 180 ~ -180 to avoid angle wind up when looping and flipping
-	b16ldi Temp, 4170 ;(4170 counts per 180degrees)				
-
-	b16cmp GyroAnglePitch, Temp
-	brlt im41
-	b16sub GyroAnglePitch, GyroAnglePitch, Temper
-im41:
-	b16cmp GyroAngleRoll, Temp
-	brlt im42
-	b16sub GyroAngleRoll, GyroAngleRoll, Temper
-im42:
-	b16neg Temp
-
-	b16cmp GyroAnglePitch, Temp
-	brge im43
-	b16add GyroAnglePitch, GyroAnglePitch, Temper
-im43:
-	b16cmp GyroAngleRoll, Temp
-	brge im44
-	b16add GyroAngleRoll, GyroAngleRoll, Temper
-im44:
-
-*/
-
-	b16ldi Temp, 10					;calculate tilt angle with the acc. (this approximation is good to about 45degrees)
+	b16ldi Temp, 0.7
 	b16mul AccAngleRoll, AccY, Temp
 	b16mul AccAnglePitch, AccX, Temp
 
-/*
-	;--- Correct tilt angle ---
 
-	b16ldi Temp, 600				;skip correction at large tilt angles
-	b16cmp GyroAnglePitch, Temp
+	;--- Add correction data to gyro inputs based on difference between Euler angles and acc angles ---
+
+	b16ldi Temp, 10					;skip correction at angles greater than 10
+	b16cmp EulerAnglePitch, Temp
 	longbrge im40
-	b16cmp GyroAngleRoll, Temp
+	b16cmp EulerAngleRoll, Temp
 	longbrge im40
 
 	b16neg Temp
-	b16cmp GyroAnglePitch, Temp
+	b16cmp EulerAnglePitch, Temp
 	longbrlt im40
-	b16cmp GyroAngleRoll, Temp
+	b16cmp EulerAngleRoll, Temp
 	longbrlt im40
 
-	b16sub Error, AccAngleRoll, GyroAngleRoll	;Correct gyro driven tilt angle with a small part of the acc driven tilt angle
-	b16fdiv Error, 10
-	b16add GyroAngleRoll, GyroAngleRoll, Error
-		
-	b16sub Error, AccAnglePitch, GyroAnglePitch
-	b16fdiv Error, 10
-	b16add GyroAnglePitch, GyroAnglePitch, Error
+	b16ldi Temp, 40					;skip correction if vertical accelleration is outside 0.7 to 1.3 G
+	b16cmp AccZ, Temp
+	longbrge im40
+
+	b16neg Temp
+	b16cmp AccZ, Temp
+	longbrlt im40
+	 
+	b16sub Temp, EulerAngleRoll, AccAngleRoll	;add roll correction
+	b16fdiv Temp, 2
+	b16add GyroRoll, GyroRoll, Temp
+
+	b16sub Temp, EulerAnglePitch, AccAnglePitch	;add pitch correction
+	b16fdiv Temp, 2
+	b16add GyroPitch, GyroPitch, Temp
+
+;	LedOn
 
 im40:
+
+	;--- Rotate up-direction 3D vector with gyro inputs ---
+
+	call Rotate3dVector
+
+	call Lenght3dVector
+	
+	call ExtractEulerAngles
+
+	;--debug
+/*
+	b824load vectorX
+	call transfer824168
+	b16store debug5
+	b16ldi Temp, 2220
+	b16mul debug5, debug5, Temp
+
+	b824load vectorY
+	call transfer824168
+	b16store debug6
+	b16ldi Temp, 2220
+	b16mul debug6, debug6, Temp
+
+	b824load vectorZ
+	call transfer824168
+	b16store debug7
+	b16ldi Temp, 2220
+	b16mul debug7, debug7, Temp
 */
+
+
+
 	;--- Calculate Stick and Gyro  ---
 
 	rvbrflagfalse flagThrottleZero, im7	;reset integrals if throttle closed 
@@ -105,9 +114,9 @@ im31:
 
 	b16neg RxRoll
 	
-	b16fmul RxRoll, 3
+	b16fdiv RxRoll, 1
 
-	b16sub Error, AccAngleRoll, RxRoll	;calculate error
+	b16sub Error, EulerAngleRoll, RxRoll	;calculate error
 	b16fdiv Error, 4
 
 	b16mul Value, Error, SelflevelPgain	;Proposjonal gain
@@ -123,9 +132,9 @@ im31:
 
 	b16neg RxPitch
 	
-	b16fmul RxPitch, 3
+	b16fdiv RxPitch, 1
 
-	b16sub Error, AccAnglePitch, RxPitch	;calculate error
+	b16sub Error, EulerAnglePitch, RxPitch	;calculate error
 	b16fdiv Error, 4
 
 	b16mul Value, Error, SelflevelPgain	;Proposjonal gain
@@ -220,6 +229,12 @@ lim5:	b16neg LimitV		;low limit
 	b16mov Value, LimitV
 
 lim6:	ret
+
+
+
+
+
+
 
 
 /*

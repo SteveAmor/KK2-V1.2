@@ -1,5 +1,5 @@
 
-.macro RamVariableEnumerate
+.macro RamVariableEnumerate8
 
 .if RamVariables > 0x07f8
 .error "?Out of memory."
@@ -86,7 +86,7 @@
 	ldi zh, high(@0)
 .endmacro
 
-.macro FixedPointVariableEnumerate
+.macro FixedPointVariableEnumerate168
 
 .if RamVariables > 0x07f8
 .error "?Out of memory."
@@ -94,6 +94,17 @@
 
 .equ @0 = RamVariables
 .set RamVariables = RamVariables + 3
+
+.endmacro
+
+.macro FixedPointVariableEnumerate824
+
+.if RamVariables > 0x07f8
+.error "?Out of memory."
+.endif
+
+.equ @0 = RamVariables
+.set RamVariables = RamVariables + 4
 
 .endmacro
 
@@ -288,3 +299,32 @@
 .endmacro
 
 
+.macro pushx
+	push xl
+	push xh
+.endmacro
+
+.macro popx
+	pop xh
+	pop xl
+.endmacro
+
+.macro pushy
+	push yl
+	push yh
+.endmacro
+
+.macro popy
+	pop yh
+	pop yl
+.endmacro
+
+.macro pushz
+	push zl
+	push zh
+.endmacro
+
+.macro popz
+	pop zh
+	pop zl
+.endmacro

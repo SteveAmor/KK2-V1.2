@@ -24,284 +24,311 @@
 
 .set	EeRegisters	=0x0070 ;to
 
-
+        
 
 ;---  16.8 bit signed registers ---
 
-FixedPointVariableEnumerate Temp
-FixedPointVariableEnumerate RxChannel
-FixedPointVariableEnumerate RxRoll
-FixedPointVariableEnumerate RxPitch
-FixedPointVariableEnumerate RxThrottle
-FixedPointVariableEnumerate RxYaw
-FixedPointVariableEnumerate RxAux
+FixedPointVariableEnumerate168 Temp
+FixedPointVariableEnumerate168 RxChannel
+FixedPointVariableEnumerate168 RxRoll
+FixedPointVariableEnumerate168 RxPitch
+FixedPointVariableEnumerate168 RxThrottle
+FixedPointVariableEnumerate168 RxYaw
+FixedPointVariableEnumerate168 RxAux
 
-FixedPointVariableEnumerate GyroRoll
-FixedPointVariableEnumerate GyroPitch
-FixedPointVariableEnumerate GyroYaw
-FixedPointVariableEnumerate GyroRollZero
-FixedPointVariableEnumerate GyroPitchZero
-FixedPointVariableEnumerate GyroYawZero
+FixedPointVariableEnumerate168 GyroRoll
+FixedPointVariableEnumerate168 GyroPitch
+FixedPointVariableEnumerate168 GyroYaw
+FixedPointVariableEnumerate168 GyroRollZero
+FixedPointVariableEnumerate168 GyroPitchZero
+FixedPointVariableEnumerate168 GyroYawZero
 
-FixedPointVariableEnumerate AccX
-FixedPointVariableEnumerate AccY
-FixedPointVariableEnumerate AccZ
-FixedPointVariableEnumerate AccXZero
-FixedPointVariableEnumerate AccYZero
-FixedPointVariableEnumerate AccZZero
+FixedPointVariableEnumerate168 AccX
+FixedPointVariableEnumerate168 AccY
+FixedPointVariableEnumerate168 AccZ
+FixedPointVariableEnumerate168 AccXZero
+FixedPointVariableEnumerate168 AccYZero
+FixedPointVariableEnumerate168 AccZZero
 
-FixedPointVariableEnumerate BatteryVoltage
-FixedPointVariableEnumerate BatteryVoltageLowpass
+FixedPointVariableEnumerate168 BatteryVoltage
+FixedPointVariableEnumerate168 BatteryVoltageLowpass
 
-FixedPointVariableEnumerate CommandRoll		;output from IMU
-FixedPointVariableEnumerate CommandPitch
-FixedPointVariableEnumerate CommandYaw
+FixedPointVariableEnumerate168 CommandRoll		;output from IMU
+FixedPointVariableEnumerate168 CommandPitch
+FixedPointVariableEnumerate168 CommandYaw
 
-FixedPointVariableEnumerate IntegralRoll	;PI control
-FixedPointVariableEnumerate IntegralPitch
-FixedPointVariableEnumerate IntegralYaw
-FixedPointVariableEnumerate Error
-FixedPointVariableEnumerate PgainRoll
-FixedPointVariableEnumerate PgainPitch
-FixedPointVariableEnumerate PgainYaw
-FixedPointVariableEnumerate PlimitRoll
-FixedPointVariableEnumerate PlimitPitch
-FixedPointVariableEnumerate PlimitYaw
-FixedPointVariableEnumerate IgainRoll
-FixedPointVariableEnumerate IgainPitch
-FixedPointVariableEnumerate IgainYaw
-FixedPointVariableEnumerate IlimitRoll
-FixedPointVariableEnumerate IlimitPitch
-FixedPointVariableEnumerate IlimitYaw
+FixedPointVariableEnumerate168 IntegralRoll	;PI control
+FixedPointVariableEnumerate168 IntegralPitch
+FixedPointVariableEnumerate168 IntegralYaw
+FixedPointVariableEnumerate168 Error
+FixedPointVariableEnumerate168 PgainRoll
+FixedPointVariableEnumerate168 PgainPitch
+FixedPointVariableEnumerate168 PgainYaw
+FixedPointVariableEnumerate168 PlimitRoll
+FixedPointVariableEnumerate168 PlimitPitch
+FixedPointVariableEnumerate168 PlimitYaw
+FixedPointVariableEnumerate168 IgainRoll
+FixedPointVariableEnumerate168 IgainPitch
+FixedPointVariableEnumerate168 IgainYaw
+FixedPointVariableEnumerate168 IlimitRoll
+FixedPointVariableEnumerate168 IlimitPitch
+FixedPointVariableEnumerate168 IlimitYaw
 
-FixedPointVariableEnumerate EscLowLimit
+FixedPointVariableEnumerate168 EscLowLimit
 
-FixedPointVariableEnumerate StickScaleRoll
-FixedPointVariableEnumerate StickScalePitch
-FixedPointVariableEnumerate StickScaleYaw
-FixedPointVariableEnumerate StickScaleThrottle
+FixedPointVariableEnumerate168 StickScaleRoll
+FixedPointVariableEnumerate168 StickScalePitch
+FixedPointVariableEnumerate168 StickScaleYaw
+FixedPointVariableEnumerate168 StickScaleThrottle
 
-FixedPointVariableEnumerate Mixvalue
+FixedPointVariableEnumerate168 Mixvalue
 
-FixedPointVariableEnumerate Out1
-FixedPointVariableEnumerate Out2
-FixedPointVariableEnumerate Out3
-FixedPointVariableEnumerate Out4
-FixedPointVariableEnumerate Out5
-FixedPointVariableEnumerate Out6
-FixedPointVariableEnumerate Out7
-FixedPointVariableEnumerate Out8
+FixedPointVariableEnumerate168 Out1
+FixedPointVariableEnumerate168 Out2
+FixedPointVariableEnumerate168 Out3
+FixedPointVariableEnumerate168 Out4
+FixedPointVariableEnumerate168 Out5
+FixedPointVariableEnumerate168 Out6
+FixedPointVariableEnumerate168 Out7
+FixedPointVariableEnumerate168 Out8
 
-FixedPointVariableEnumerate FilteredOut1
-FixedPointVariableEnumerate FilteredOut2
-FixedPointVariableEnumerate FilteredOut3
-FixedPointVariableEnumerate FilteredOut4
-FixedPointVariableEnumerate FilteredOut5
-FixedPointVariableEnumerate FilteredOut6
-FixedPointVariableEnumerate FilteredOut7
-FixedPointVariableEnumerate FilteredOut8
+FixedPointVariableEnumerate168 FilteredOut1
+FixedPointVariableEnumerate168 FilteredOut2
+FixedPointVariableEnumerate168 FilteredOut3
+FixedPointVariableEnumerate168 FilteredOut4
+FixedPointVariableEnumerate168 FilteredOut5
+FixedPointVariableEnumerate168 FilteredOut6
+FixedPointVariableEnumerate168 FilteredOut7
+FixedPointVariableEnumerate168 FilteredOut8
 
-FixedPointVariableEnumerate Offset1
-FixedPointVariableEnumerate Offset2
-FixedPointVariableEnumerate Offset3
-FixedPointVariableEnumerate Offset4
-FixedPointVariableEnumerate Offset5
-FixedPointVariableEnumerate Offset6
-FixedPointVariableEnumerate Offset7
-FixedPointVariableEnumerate Offset8
+FixedPointVariableEnumerate168 Offset1
+FixedPointVariableEnumerate168 Offset2
+FixedPointVariableEnumerate168 Offset3
+FixedPointVariableEnumerate168 Offset4
+FixedPointVariableEnumerate168 Offset5
+FixedPointVariableEnumerate168 Offset6
+FixedPointVariableEnumerate168 Offset7
+FixedPointVariableEnumerate168 Offset8
 
-FixedPointVariableEnumerate Temper
+FixedPointVariableEnumerate168 Temper
 
-FixedPointVariableEnumerate SelflevelPgain
-FixedPointVariableEnumerate SelflevelPlimit
+FixedPointVariableEnumerate168 SelflevelPgain
+FixedPointVariableEnumerate168 SelflevelPlimit
 
-FixedPointVariableEnumerate HeightDampeningGain
-FixedPointVariableEnumerate HeightDampeningLimit
+FixedPointVariableEnumerate168 HeightDampeningGain
+FixedPointVariableEnumerate168 HeightDampeningLimit
 
-FixedPointVariableEnumerate BattAlarmVoltage
+FixedPointVariableEnumerate168 BattAlarmVoltage
 
-FixedPointVariableEnumerate GyroAngleRoll
-FixedPointVariableEnumerate GyroAnglePitch
+FixedPointVariableEnumerate168 AccAngleRoll
+FixedPointVariableEnumerate168 AccAnglePitch
 
-FixedPointVariableEnumerate AccAngleRoll
-FixedPointVariableEnumerate AccAnglePitch
+FixedPointVariableEnumerate168 Debug6
+FixedPointVariableEnumerate168 Debug5
+FixedPointVariableEnumerate168 Debug7
+FixedPointVariableEnumerate168 Debug8
 
-FixedPointVariableEnumerate Debug6
-FixedPointVariableEnumerate Debug5
-FixedPointVariableEnumerate Debug7
-FixedPointVariableEnumerate Debug8
+FixedPointVariableEnumerate168 LimitV
+FixedPointVariableEnumerate168 Value
 
-FixedPointVariableEnumerate LimitV
-FixedPointVariableEnumerate Value
+FixedPointVariableEnumerate168 LvaDdsAcc
 
-FixedPointVariableEnumerate LvaDdsAcc
+FixedPointVariableEnumerate168 PwmOutput
 
-FixedPointVariableEnumerate PwmOutput
+FixedPointVariableEnumerate168 ServoFilter
 
-FixedPointVariableEnumerate ServoFilter
+FixedPointVariableEnumerate168 ArmedBeepDds
 
-FixedPointVariableEnumerate ArmedBeepDds
+FixedPointVariableEnumerate168 BeeperDelay
 
-FixedPointVariableEnumerate BeeperDelay
+FixedPointVariableEnumerate168 AccTrimRoll
+FixedPointVariableEnumerate168 AccTrimPitch
 
-FixedPointVariableEnumerate AccTrimRoll
-FixedPointVariableEnumerate AccTrimPitch
+FixedPointVariableEnumerate168 AutoDisarmDelay
 
-FixedPointVariableEnumerate AutoDisarmDelay
+FixedPointVariableEnumerate168 CheckRxDelay
 
-FixedPointVariableEnumerate CheckRxDelay
+FixedPointVariableEnumerate168 NoActivityTimer
+FixedPointVariableEnumerate168 NoActivityDds
 
-FixedPointVariableEnumerate NoActivityTimer
-FixedPointVariableEnumerate NoActivityDds
+FixedPointVariableEnumerate168 LiveUpdateTimer
 
-FixedPointVariableEnumerate LiveUpdateTimer
+FixedPointVariableEnumerate168 EulerAngleRoll
+FixedPointVariableEnumerate168 EulerAnglePitch
+
+FixedPointVariableEnumerate168 Angle
+
+
+
+FixedPointVariableEnumerate824 Theta
+FixedPointVariableEnumerate824 Sine
+FixedPointVariableEnumerate824 Cosine
+
+FixedPointVariableEnumerate824 VectorX
+FixedPointVariableEnumerate824 VectorY
+FixedPointVariableEnumerate824 VectorZ
+FixedPointVariableEnumerate824 LengthVector
+
+FixedPointVariableEnumerate824 VectorA
+FixedPointVariableEnumerate824 VectorB
+
+FixedPointVariableEnumerate824 TempA
+FixedPointVariableEnumerate824 TempB
+FixedPointVariableEnumerate824 TempC
+FixedPointVariableEnumerate824 TempD
+
+
+FixedPointVariableEnumerate824 VectorNewA
+FixedPointVariableEnumerate824 VectorNewB
+
+FixedPointVariableEnumerate824 Debug
+
 
 ;--- RAM variables (8bit)----
 
-RamVariableEnumerate Xpos		;pixel pos
-RamVariableEnumerate Ypos
+RamVariableEnumerate8 Xpos		;pixel pos
+RamVariableEnumerate8 Ypos
 
-RamVariableEnumerate X1			;line start and end
-RamVariableEnumerate Y1
-RamVariableEnumerate X2
-RamVariableEnumerate Y2
+RamVariableEnumerate8 X1		;line start and end
+RamVariableEnumerate8 Y1
+RamVariableEnumerate8 X2
+RamVariableEnumerate8 Y2
 
-RamVariableEnumerate PixelType		;0 = EOR   1 = OR   2 = AND
+RamVariableEnumerate8 PixelType		;0 = EOR   1 = OR   2 = AND
 
-RamVariableEnumerate FontSelector
+RamVariableEnumerate8 FontSelector
 
-RamVariableEnumerate MainMenuCursorYposSave
-RamVariableEnumerate MainMenuListYposSave
+RamVariableEnumerate8 MainMenuCursorYposSave
+RamVariableEnumerate8 MainMenuListYposSave
 
-RamVariableEnumerate LoadMenuCursorYposSave
-RamVariableEnumerate LoadMenuListYposSave
+RamVariableEnumerate8 LoadMenuCursorYposSave
+RamVariableEnumerate8 LoadMenuListYposSave
 
-RamVariableEnumerate RollStartL		;used in readrx.asm
-RamVariableEnumerate RollStartH
+RamVariableEnumerate8 RollStartL		;used in readrx.asm
+RamVariableEnumerate8 RollStartH
 
-RamVariableEnumerate PitchStartL
-RamVariableEnumerate PitchStartH
+RamVariableEnumerate8 PitchStartL
+RamVariableEnumerate8 PitchStartH
 
-RamVariableEnumerate ThrottleStartL
-RamVariableEnumerate ThrottleStartH
+RamVariableEnumerate8 ThrottleStartL
+RamVariableEnumerate8 ThrottleStartH
 
-RamVariableEnumerate YawStartL
-RamVariableEnumerate YawStartH
+RamVariableEnumerate8 YawStartL
+RamVariableEnumerate8 YawStartH
 
-RamVariableEnumerate AuxStartL
-RamVariableEnumerate AuxStartH
-
-
-RamVariableEnumerate RollL		;output from readrx.asm
-RamVariableEnumerate RollH
-
-RamVariableEnumerate PitchL
-RamVariableEnumerate PitchH
-
-RamVariableEnumerate ThrottleL
-RamVariableEnumerate ThrottleH
-
-RamVariableEnumerate YawL
-RamVariableEnumerate YawH
-
-RamVariableEnumerate AuxL
-RamVariableEnumerate AuxH
-
-RamVariableEnumerate RollDcnt
-RamVariableEnumerate PitchDcnt
-RamVariableEnumerate ThrottleDcnt
-RamVariableEnumerate YawDcnt
-RamVariableEnumerate AuxDcnt
-
-RamVariableEnumerate flagRollValid
-RamVariableEnumerate flagPitchValid
-RamVariableEnumerate flagThrottleValid
-RamVariableEnumerate flagYawValid
-RamVariableEnumerate flagAuxValid
-
-RamVariableEnumerate RxTimeoutLimit
-
-RamVariableEnumerate OutputRateBitmask	;for each output channel: 0=slow rate  1=fast rate
-RamVariableEnumerate OutputTypeBitmask	;for each output channel: 0=servo 1=ESC
-RamVariableEnumerate OutputRateDivider	;
-RamVariableEnumerate OutputRateDividerCounter
-
-RamVariableEnumerate flagRollPitchLink
-
-RamVariableEnumerate flagPwmEnd
-
-RamVariableEnumerate flagArmed
-RamVariableEnumerate flagArmedOldState
-RamVariableEnumerate flagThrottleZero
-RamVariableEnumerate ArmingDelay
-
-RamVariableEnumerate TimeStampL		;for debug purposes
-RamVariableEnumerate TimeStampH
-
-RamVariableEnumerate flagLcdUpdate
-
-RamVariableEnumerate flagSelfLevelType
-RamVariableEnumerate flagSelfLevelOn
-RamVariableEnumerate flagStickCommandSelfLevelOn
-
-RamVariableEnumerate flagArmingType
-RamVariableEnumerate flagAuxOn
-RamVariableEnumerate flagAuxOnOldState
-
-RamVariableEnumerate ButtonDelay
-
-RamVariableEnumerate flagSensorsOk
-
-RamVariableEnumerate flagA
-RamVariableEnumerate flagB
-RamVariableEnumerate flagC
-
-RamVariableEnumerate Index
-
-RamVariableEnumerate OutputTypeBitmaskCopy
-
-RamVariableEnumerate flagInactive
-
-RamVariableEnumerate flagLvaBuzzerOn
-
-RamVariableEnumerate flagGeneralBuzzerOn
-
-RamVariableEnumerate Status
-RamVariableEnumerate StatusOldState
-
-RamVariableEnumerate flagAutoDisarm
-
-RamVariableEnumerate flagMutePwm
-
-RamVariableEnumerate flagCppmOn
-
-RamVariableEnumerate CppmPulseStartL
-RamVariableEnumerate CppmPulseStartH
-
-RamVariableEnumerate CppmPulseArrayAddressL
-RamVariableEnumerate CppmPulseArrayAddressH
-
-RamVariableEnumerate CppmChannel1L
-RamVariableEnumerate CppmChannel1H
-RamVariableEnumerate CppmChannel2L
-RamVariableEnumerate CppmChannel2H
-RamVariableEnumerate CppmChannel3L
-RamVariableEnumerate CppmChannel3H
-RamVariableEnumerate CppmChannel4L
-RamVariableEnumerate CppmChannel4H
-RamVariableEnumerate CppmChannel5L
-RamVariableEnumerate CppmChannel5H
-RamVariableEnumerate CppmChannel6L
-RamVariableEnumerate CppmChannel6H
-RamVariableEnumerate CppmChannel7L
-RamVariableEnumerate CppmChannel7H
-RamVariableEnumerate CppmChannel8L
-RamVariableEnumerate CppmChannel8H
-RamVariableEnumerate CppmChannel9L
-RamVariableEnumerate CppmChannel9H
+RamVariableEnumerate8 AuxStartL
+RamVariableEnumerate8 AuxStartH
 
 
-RamVariableEnumerate CppmTimeoutCounter
+RamVariableEnumerate8 RollL		;output from readrx.asm
+RamVariableEnumerate8 RollH
+
+RamVariableEnumerate8 PitchL
+RamVariableEnumerate8 PitchH
+
+RamVariableEnumerate8 ThrottleL
+RamVariableEnumerate8 ThrottleH
+
+RamVariableEnumerate8 YawL
+RamVariableEnumerate8 YawH
+
+RamVariableEnumerate8 AuxL
+RamVariableEnumerate8 AuxH
+
+RamVariableEnumerate8 RollDcnt
+RamVariableEnumerate8 PitchDcnt
+RamVariableEnumerate8 ThrottleDcnt
+RamVariableEnumerate8 YawDcnt
+RamVariableEnumerate8 AuxDcnt
+
+RamVariableEnumerate8 flagRollValid
+RamVariableEnumerate8 flagPitchValid
+RamVariableEnumerate8 flagThrottleValid
+RamVariableEnumerate8 flagYawValid
+RamVariableEnumerate8 flagAuxValid
+
+RamVariableEnumerate8 RxTimeoutLimit
+
+RamVariableEnumerate8 OutputRateBitmask	;for each output channel: 0=slow rate  1=fast rate
+RamVariableEnumerate8 OutputTypeBitmask	;for each output channel: 0=servo 1=ESC
+RamVariableEnumerate8 OutputRateDivider	;
+RamVariableEnumerate8 OutputRateDividerCounter
+
+RamVariableEnumerate8 flagRollPitchLink
+
+RamVariableEnumerate8 flagPwmEnd
+
+RamVariableEnumerate8 flagArmed
+RamVariableEnumerate8 flagArmedOldState
+RamVariableEnumerate8 flagThrottleZero
+RamVariableEnumerate8 ArmingDelay
+
+RamVariableEnumerate8 TimeStampL		;for debug purposes
+RamVariableEnumerate8 TimeStampH
+
+RamVariableEnumerate8 flagLcdUpdate
+
+RamVariableEnumerate8 flagSelfLevelType
+RamVariableEnumerate8 flagSelfLevelOn
+RamVariableEnumerate8 flagStickCommandSelfLevelOn
+
+RamVariableEnumerate8 flagAuxOn
+RamVariableEnumerate8 flagAuxOnOldState
+
+RamVariableEnumerate8 ButtonDelay
+
+RamVariableEnumerate8 flagSensorsOk
+
+RamVariableEnumerate8 flagA
+RamVariableEnumerate8 flagB
+RamVariableEnumerate8 flagC
+
+RamVariableEnumerate8 Index
+
+RamVariableEnumerate8 OutputTypeBitmaskCopy
+
+RamVariableEnumerate8 flagInactive
+
+RamVariableEnumerate8 flagLvaBuzzerOn
+
+RamVariableEnumerate8 flagGeneralBuzzerOn
+
+RamVariableEnumerate8 Status
+RamVariableEnumerate8 StatusOldState
+
+RamVariableEnumerate8 flagAutoDisarm
+
+RamVariableEnumerate8 flagMutePwm
+
+RamVariableEnumerate8 flagCppmOn
+
+RamVariableEnumerate8 CppmPulseStartL
+RamVariableEnumerate8 CppmPulseStartH
+
+RamVariableEnumerate8 CppmPulseArrayAddressL
+RamVariableEnumerate8 CppmPulseArrayAddressH
+
+RamVariableEnumerate8 CppmChannel1L
+RamVariableEnumerate8 CppmChannel1H
+RamVariableEnumerate8 CppmChannel2L
+RamVariableEnumerate8 CppmChannel2H
+RamVariableEnumerate8 CppmChannel3L
+RamVariableEnumerate8 CppmChannel3H
+RamVariableEnumerate8 CppmChannel4L
+RamVariableEnumerate8 CppmChannel4H
+RamVariableEnumerate8 CppmChannel5L
+RamVariableEnumerate8 CppmChannel5H
+RamVariableEnumerate8 CppmChannel6L
+RamVariableEnumerate8 CppmChannel6H
+RamVariableEnumerate8 CppmChannel7L
+RamVariableEnumerate8 CppmChannel7H
+RamVariableEnumerate8 CppmChannel8L
+RamVariableEnumerate8 CppmChannel8H
+RamVariableEnumerate8 CppmChannel9L
+RamVariableEnumerate8 CppmChannel9H
+
+
+RamVariableEnumerate8 CppmTimeoutCounter
 
 
 ;--- EEPROM registers ----
@@ -331,7 +358,6 @@ EEVariableEnumerate8 eeCppmYaw
 EEVariableEnumerate8 eeCppmAux
 
 EEVariableEnumerate8 eeSelfLevelType		;true=Stick command  false=Aux    ;do not change the order of these variables, works as an array
-EEVariableEnumerate8 eeArmingType		;true=Stick command  false=always on
 EEVariableEnumerate8 eeLinkRollPitch		;true=on  false=off 
 EEVariableEnumerate8 eeAutoDisarm		;true=on  false=off
 EEVariableEnumerate8 eeCppmOn			;true=on  false=off
@@ -346,11 +372,11 @@ EEVariableEnumerate8 eeSensorsCalibrated
 
 					;r0-r1 used by the HW multiplier
 
-					;r2-r8 part of the local variables pool
+					;r2-r13 part of the local variables pool
 
-.def	treg			=r9	;temp reg for ISR
+.def	treg			=r14	;temp reg for ISR
 
-.def	SregSaver		=r13	;Storage of the SREG, used in ISR
+.def	SregSaver		=r15	;Storage of the SREG, used in ISR
 
 .def	t			=r16	;Main temporary register
 

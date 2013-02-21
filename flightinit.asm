@@ -130,7 +130,7 @@ fli8:	b16store_array FilteredOut1, Temp
 
 	ldz eeSelflevelPgain
 	call fli2
-	call fli3
+;	call fli3
 	b16mov SelflevelPgain, Temp
 
 	ldz eeSelflevelPlimit
@@ -156,23 +156,16 @@ fli8:	b16store_array FilteredOut1, Temp
 
 	ldz eeAccTrimRoll
 	call fli2
-	b16fdiv Temp, 5
+	b16fdiv Temp, 3
 	b16mov AccTrimRoll, Temp
 
 	ldz eeAccTrimPitch
 	call fli2
-	b16fdiv Temp, 5
+	b16fdiv Temp, 3
 	b16mov AccTrimPitch, Temp
 
 
 	ldz EeSensorCalData		;load calibration data
-
-	call GetEeVariable168
-	b16store GyroRollZero
-	call GetEeVariable168
-	b16store GyroPitchZero
-	call GetEeVariable168
-	b16store GyroYawZero
 
 	call GetEeVariable168
 	b16store AccXZero
@@ -185,10 +178,6 @@ fli8:	b16store_array FilteredOut1, Temp
 	ldz eeSelfLevelType		;read flags from EE
 	call ReadEeprom
 	sts flagSelfLevelType, t
-
-	ldz eeArmingType
-	call ReadEeprom
-	sts flagArmingType, t
 
 	ldz eeLinkRollPitch
 	call ReadEeprom
@@ -217,8 +206,6 @@ fli8:	b16store_array FilteredOut1, Temp
 
 	lrv ButtonDelay, 0
 
-	b16clr GyroAngleRoll
-	b16clr GyroAnglePitch
 	b16clr RxRoll
 	b16clr RxPitch
 	b16clr RxYaw
@@ -241,6 +228,14 @@ fli8:	b16store_array FilteredOut1, Temp
 
 
 	b16clr LiveUpdateTimer
+
+	b824clr VectorX				;set 3d vector to point straigth up
+	b824clr VectorY
+	b824ldi VectorZ, 1
+
+	b16clr EulerAngleRoll
+	b16clr EulerAnglePitch
+
 
 
 

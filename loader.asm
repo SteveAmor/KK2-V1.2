@@ -8,7 +8,7 @@ loa13:	ldy loa1 * 2
 	lds xl, LoadMenuListYposSave
 	lds xh, LoadMenuCursorYposSave
 
-	ldi t, 22
+	ldi t, 19
 
 	call Menu
 
@@ -89,9 +89,9 @@ loa1:	.db "SingleCopter 2M 2S  "
 	.db "H8                  "
 	.db "V6                  "
 	.db "V8                  "
-	.db "Airplane 1S Aileron "
-	.db "Airplane 2S Aileron "
-	.db "Flying Wing         "
+;	.db "Airplane 1S Aileron "
+;	.db "Airplane 2S Aileron "
+;	.db "Flying Wing         "
 	.db "Y4                  "
 	.db "V-Tail              "
 
@@ -272,6 +272,7 @@ mod0:
 	.db  100,-81 , 24 , 100, 0  , 3  , 0  , 0	;m7
 	.db  100,-100, 71 ,-100, 0  , 3  , 0  , 0	;m8
 
+/*
 	;    thr roll pitch yaw offs flags unused
 	.db  100, 0  , 0  , 0  , 0  , 3  , 0  , 0	;m1
 	.db  0  , 100, 0  , 0  , 50 , 0  , 0  , 0	;m2
@@ -302,6 +303,7 @@ mod0:
 	.db  0  , 0  , 0  , 0  , 0  , 0  , 0  , 0	;m7
 	.db  0  , 0  , 0  , 0  , 0  , 0  , 0  , 0	;m8
 
+*/
 	;    thr roll pitch yaw offs flags unused
 	.db  100,-71 , 71 , 100, 0  , 3  , 0  , 0	;m1
 	.db  100, 71 , 71 ,-100, 0  , 3  , 0  , 0	;m2

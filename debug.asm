@@ -74,31 +74,31 @@ bbb30:	call LcdClear
 	lrv X1, 0	
 	rvadd Y1, 8 
 	mPrintString ttt10
-	b16load Temp
-	call Print16Signed 
+	b824load VectorX
+	rcall b824print
 
 	lrv X1, 0	
 	rvadd Y1, 8 
 	mPrintString ttt11
-	b16load Temp
-	call Print16Signed 
+	b824load VectorY
+	rcall b824print
 
 	lrv X1, 0	
 	rvadd Y1, 8 
 	mPrintString ttt12
-	b16load Temp
-	call Print16Signed 
+	b824load VectorZ
+	rcall b824print
 
 	lrv X1, 0	
 	rvadd Y1, 8 
 	mPrintString ttt13
-	b16load GyroAngleRoll
+	b16load AccAngleRoll
 	call Print16Signed 
 
 	lrv X1, 0	
 	rvadd Y1, 8 
 	mPrintString ttt14
-	b16load GyroAnglePitch
+	b16load AccAnglePitch
 	call Print16Signed 
 
 	lrv X1, 0	
@@ -109,9 +109,9 @@ bbb30:	call LcdClear
 
 	lrv X1, 0	
 	rvadd Y1, 8 
-	mPrintString ttt
-	b16load temp
-	call Print16Signed 
+	mPrintString ttt16
+	b824load LengthVector
+	rcall b824print
 
 
 	call LcdUpdate
@@ -132,19 +132,16 @@ ttt7:	.db "EscLowLimit: ",0
 ttt8:	.db "BattAlarmVoltage:",0
 
 ttt9:	.db "ServoFilter: ",0
-ttt10:	.db "Unused: ",0,0
-ttt11:	.db "Unused: ",0,0
-ttt12:	.db "Unused: ",0,0
-ttt13:	.db "AngleRoll: ",0
-ttt14:	.db "AnglePitch: ",0,0
+ttt10:	.db "VectorX: ",0
+ttt11:	.db "VectorY: ",0
+ttt12:	.db "VectorZ: ",0
+ttt13:	.db "AccAngleRoll: ",0,0
+ttt14:	.db "AccAnglePitch: ",0
 ttt15:	.db "BatteryVoltage:",0
-
-
-ttt:	.db "unused",0,0
+ttt16:	.db "VectorLen: ",0
 
 
 /*
-
 
 debugCU:
 
@@ -154,7 +151,7 @@ debugCU:
 	b16ldi Temper, 2220
 	b16add Out5, Temper, Temp
 
-	b16ldi Temp, -10
+	b16ldi Temp, -1
 	b16mul Temp, Debug6, Temp
 	b16ldi Temper, 2220
 	b16add Out6, Temper, Temp
@@ -403,3 +400,48 @@ ba1:	dec t
 
 
 */
+
+
+
+b824print:
+	mov t, xh
+	rcall hexprint
+	mov t, xl
+	rcall hexprint
+	mov t, yh
+	rcall hexprint
+	mov t, yl
+	rcall hexprint
+	ret
+
+
+hexprint:
+	pushz
+	push t
+
+	swap t
+	andi t, 0x0f
+
+	rcall hex2
+
+	pop t
+	andi t, 0x0f
+	rcall hex2
+
+	popz
+	ret
+
+hex2:	ldz hex1*2
+	add zl, t
+	clr t
+	adc zh, t
+
+	lpm t, z
+	call PrintChar
+	ret
+
+hex1:	.db "0123456789ABCDEF"
+
+
+
+

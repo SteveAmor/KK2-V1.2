@@ -22,17 +22,16 @@ UpdateFlightDisplay:
 
 udp3:	lrv X1, 38				;Safe
 	lrv Y1, 0
+
+;	rjmp imudebug				;enable this line for IMU debug screen
+
 	mPrintString upd2
 
 udp22:
 
-	;--- Print footer if safe or if armed and armingtype is always on ---
+	;--- Print footer if safe ---
 
-	rvflagnot flagA, flagArmingType
-	rvflagand flagA, flagArmed, flagA
-	rvflagnot flagB, flagArmed
-	rvflagor  flagA, flagA, flagB  
-	rvbrflagfalse flagA, udp20
+	rvbrflagtrue flagArmed, udp20
 
 
 	lrv X1, 0				;footer
@@ -111,31 +110,17 @@ udp13:
 	mPrintString udp31
 
 
-
-/*
-	lrv X1, 0
+	lrv X1, 0			;show Euler angles
 	lrv Y1, 45
 	mPrintString udp18
-	b16ldi Temper, 0.04316
-	b16ldi Temp, 0.5
-	b16add Temp, GyroAngleRoll, Temp
-	b16mul Temp, Temp, Temper
-	b16load Temp
+	b16load EulerAngleRoll
  	call Print16Signed 
-
 
 	lrv X1, 0
 	lrv Y1, 54
 	mPrintString udp19
-	b16ldi Temp, 0.5
-	b16add Temp, GyroAnglePitch, Temp
-	b16mul Temp, Temp, Temper
-	b16load Temp
+	b16load EulerAnglePitch
  	call Print16Signed 
-
-*/
-	
-
 
 
 udp21:	call LcdUpdate
@@ -156,16 +141,16 @@ udp11:	.db "OFF",0
 
 udp30:	.db "Battery: ",0
 udp31:	.db " V",0,0
-/*
+
 
 udp18:	.db " Roll Angle:", 0, 0
 udp19:	.db "Pitch Angle:", 0, 0
 
-*/
+
 
 
 sta0:	.db "OK.",0
-sta1:	.db "Sensor not calibrated",0
+sta1:	.db "ACC not calibrated.  ",0
 sta2:	.db "Error: no Roll input.",0
 sta3:	.db "Error: no Pitch input",0
 sta4:	.db "Error: no Thro input.",0
@@ -177,4 +162,85 @@ sta7:	.db "Error: Sanity check. ",0
 
 udp24:	.dw sta0*2, sta1*2, sta2*2, sta3*2, sta4*2, sta5*2, sta6*2, sta7*2
 
+
+/*
+
+	;--- 3D vector debug code, show vector and angles
+
+imudebug:
+
+	lrv PixelType, 1
+	lrv FontSelector, f6x8
+
+	lrv X1, 0
+	lrv Y1, 0
+	b824load VectorX
+	call b824print
+
+	rvadd X1, 8
+	b824load VectorY
+	call b824print
+
+	lrv X1, 0
+	lrv Y1, 8
+	b824load VectorZ
+	call b824print
+
+	rvadd X1, 8
+	b824load LengthVector
+	call b824print
+
+
+	lrv X1, 0
+	lrv Y1, 20
+	b16load gyroRoll
+	clr yl 
+	call b824print
+	
+	lrv X1, 64
+	lrv Y1, 20
+	b16load EulerAngleRoll
+	clr yl 
+	call b824print
+
+
+
+
+	lrv X1, 0
+	lrv Y1, 45
+	mPrintString udp18
+	b16load EulerAngleRoll
+ 	call Print16Signed 
+
+
+	lrv X1, 0
+	lrv Y1, 54
+	mPrintString udp19
+	b16load EulerAnglePitch
+ 	call Print16Signed 
+
+
+	lrv X1, 100
+	lrv Y1, 45
+	b16load AccAngleRoll
+ 	call Print16Signed 
+
+
+	lrv X1, 100
+	lrv Y1, 54
+	b16load AccAnglePitch
+ 	call Print16Signed 
+
+
+
+
+
+	rjmp udp21
+
+
+
+
+	;---- end of debug code
+
+*/
 

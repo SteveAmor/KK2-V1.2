@@ -123,21 +123,13 @@ cel21:	call LcdClear
 	ldi yl, 0
 	call wms
 
-	ldi zl, 16					;calibrate sensores, average of 16 readings
-
-	b16clr GyroRollZero
-	b16clr GyroPitchZero
-	b16clr GyroYawZero
+	ldi zl, 16					;calibrate accerellometers, average of 16 readings
 
 	b16clr AccXZero
 	b16clr AccYZero
 	b16clr AccZZero
 
 caa1:	call AdcRead
-
-	b16add GyroRollZero, GyroRollZero, GyroRoll
-	b16add GyroPitchZero, GyroPitchZero, GyroPitch
-	b16add GyroYawZero, GyroYawZero, GyroYaw
 
 	b16add AccXZero, AccXZero, AccX
 	b16add AccYZero, AccYZero, AccY
@@ -150,11 +142,7 @@ caa1:	call AdcRead
 	breq caa2
 	rjmp caa1
 
-caa2:	b16fdiv GyroRollZero, 4
-	b16fdiv GyroPitchZero, 4
-	b16fdiv GyroYawZero, 4
-
-	b16fdiv AccXZero, 4
+caa2:	b16fdiv AccXZero, 4
 	b16fdiv AccYZero, 4
 	b16fdiv AccZZero, 4
 
@@ -171,43 +159,23 @@ cel22:	ldi yl, 0
 .set xoff = 0
 .set yoff = 0
 
-	lrv X1, xoff		;gyro X
-	lrv Y1, yoff
-	mPrintString sen2
-	b16load GyroPitchZero
-	call Print16Signed 
-	call GyroCheck
-	
-	lrv X1, xoff		;gyro Y
-	lrv Y1, yoff + 9
-	mPrintString sen3
-	b16load GyroRollZero
-	call Print16Signed 
-	call GyroCheck
-
-	lrv X1, xoff		;gyro Z
-	lrv Y1, yoff + 18
-	mPrintString sen4
-	b16load GyroYawZero
-	call Print16Signed 
-	call GyroCheck
 
 	lrv X1, xoff		;acc X
-	lrv Y1, yoff + 27
+	lrv Y1, yoff + 10
 	mPrintString sen5
 	b16load AccXZero
 	call Print16Signed 
 	call AccCheck
 
 	lrv X1, xoff		;acc Y
-	lrv Y1, yoff + 36
+	lrv Y1, yoff + 19
 	mPrintString sen6
 	b16load AccYZero
 	call Print16Signed 
 	call AccCheck
 
 	lrv X1, xoff		;acc Z
-	lrv Y1, yoff + 45
+	lrv Y1, yoff + 28
 	mPrintString sen7
 	b16load AccZZero
 	call Print16Signed 
@@ -225,13 +193,6 @@ cel22:	ldi yl, 0
 
 	ldz EeSensorCalData	;save calibration data if passed.
 		
-	b16load GyroRollZero
-	call StoreEeVariable168
-	b16load GyroPitchZero
-	call StoreEeVariable168
-	b16load GyroYawZero
-	call StoreEeVariable168
-
 	b16load AccXZero
 	call StoreEeVariable168
 	b16load AccYZero
@@ -262,24 +223,8 @@ cel23:	call GetButtonsBlocking
 	rjmp cel33
 
 cel29:	lrv X1,0
-	lrv Y1,1
+	lrv Y1,25
 	mPrintString cel24
-
-	lrv X1,0
-	rvadd y1, 18
-	mPrintString cel25
-
-	lrv X1,0
-	rvadd y1, 9
-	mPrintString cel26
-
-	lrv X1,0
-	rvadd y1, 9
-	mPrintString cel27
-
-	lrv X1,0
-	rvadd y1, 9
-	mPrintString cel28
 
 	rjmp cel30
 
@@ -297,6 +242,34 @@ cel30:		;footer
 cel32:	call GetButtonsBlocking
 	cpi t, 0x01		;CONTINUE?
 	brne cel32
+
+	ret
+
+
+
+gyrocal:
+	ldi zl, 16					;calibrate gyros, average of 16 readings
+
+	b16clr GyroRollZero
+	b16clr GyroPitchZero
+	b16clr GyroYawZero
+
+cna1:	call AdcRead
+
+	b16add GyroRollZero, GyroRollZero, GyroRoll
+	b16add GyroPitchZero, GyroPitchZero, GyroPitch
+	b16add GyroYawZero, GyroYawZero, GyroYaw
+
+	ldi yl, 100
+	call wms
+
+	dec zl
+	breq cna2
+	rjmp cna1
+
+cna2:	b16fdiv GyroRollZero, 4
+	b16fdiv GyroPitchZero, 4
+	b16fdiv GyroYawZero, 4
 
 	ret
 
@@ -323,10 +296,6 @@ cel16:	.db "<--", 0
 cel19:	.db "Calibrating...", 0, 0
 
 cel24:	.db "Calibration failed.", 0
-cel25:	.db "Make sure the air-",0, 0
-cel26:	.db "craft is level and",0, 0
-cel27:	.db "stationary, and try",0
-cel28:	.db "again.",0, 0
- 
+
 cel31:	.db "Calibration succeeded", 0
 

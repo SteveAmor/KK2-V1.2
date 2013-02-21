@@ -10,7 +10,8 @@
 .include "miscmacros.inc"
 .include "variables.asm"
 .include "hardware.asm"
-.include "168mathlib_ram_macros_v1.asm"
+.include "168mathlib_macros.inc"
+.include "824mathlib_macros.inc"
 .include "constants.asm"
 
 .org 0x0000
@@ -90,6 +91,8 @@ reset:	ldi t,low(ramend)	;initalize stack pointer
 	sts CppmPulseArrayAddressL, zl
 	sts CppmPulseArrayAddressH, zh
 
+	call gyrocal
+
 	call FlightInit
 
 
@@ -119,7 +122,7 @@ ma2:	call FlightInit
 
 ma1:	
 
-;sbi OutputPin8		;OBS DEBUG
+	;sbi OutputPin8		;OBS DEBUG
 
 	call PwmStart			;runtime between PwmStart and B interrupt (in PwmEnd) must not exeed 1.5ms
 	call GetRxChannels
@@ -150,10 +153,7 @@ ma8:
 	rvsetflagfalse flagLcdUpdate
 	call UpdateFlightDisplay
 
-ma3:	lds xl, flagArmed		;skip buttonreading if armed and arming mode is stick arming
-	lds xh, flagArmingType
-	and xl, xh
-	brflagfalse xl, ma7
+ma3:	rvbrflagfalse flagArmed, ma7	;skip buttonreading if armed
 	rjmp ma1
 
 ma7:	load t, pinb			;read buttons
@@ -186,6 +186,7 @@ ma6:
 	rjmp ma2
 
 
+.include "trigonometry.asm"
 .include "cppmsettings.asm"
 .include "checkrx.asm"
 .include "setuphw.asm"
@@ -222,6 +223,8 @@ ma6:
 .include "sensorreading.asm"
 .include "ST7565.asm"
 .include "miscsubs.asm"
+.include "168mathlib_subs.asm"
+.include "824mathlib_subs.asm"
 font6x8:
 .include "font6x8.asm"
 font8x12:

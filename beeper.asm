@@ -17,7 +17,6 @@ bee2:
 	;--- Make a short beep regulary when armed and throttle at idle ----
 
 	rvflagand flagA, flagArmed, flagThrottleZero
-	rvflagand flagA, flagA, flagArmingType
 	rvbrflagfalse FlagA, bee4
 	
 	b16dec ArmedBeepDds

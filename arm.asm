@@ -5,7 +5,6 @@
 
 
 Arming:	rvflagand flagA, flagThrottleZero, flagAutoDisarm	;Auto disarm logic
-	rvflagand flagA, flagA, flagArmingType
 	rvflagand flagA, flagA, flagArmed
 	rvbrflagtrue flagA, arm10	
 
@@ -25,17 +24,7 @@ arm12:
 
 	;--- 
 
-	rvbrflagtrue flagArmingType, arm4	;arming type?
-
-	rvcpi Status, 0				;always on: skip arming if status is not OK.
-	breq arm13
-	ret
-
-arm13:	rvsetflagtrue flagArmed			;set and exit
-	ret
-
-
-arm4:	rvbrflagfalse flagThrottleZero, arm1	;Stick: 
+	rvbrflagfalse flagThrottleZero, arm1	;Stick: 
 
 	b16ldi Temp, -500			;Rudder in Arming position?
 	b16cmp RxYaw, Temp
@@ -64,6 +53,10 @@ arm9:	b16load RxYaw
 
 arm5:	rvsetflagtrue flagArmed			;Arm	
 	b16ldi BeeperDelay, 300
+	call gyrocal				;calibrate gyros
+	b824clr VectorX				;set 3d vector to point straigth up
+	b824clr VectorY
+	b824ldi VectorZ, 1
 	rjmp Arm11
 
 arm6:	rvsetflagfalse flagArmed		;Disarm

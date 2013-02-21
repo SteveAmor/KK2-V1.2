@@ -9,7 +9,7 @@ EscThrottleCalibration:
 	lrv PixelType, 1
 	lrv FontSelector, f6x8
 
-	lrv X1,15
+	lrv X1,2
 	lrv Y1,25
 	mPrintString esc1
 	lrv X1,0
@@ -80,6 +80,6 @@ esc4:	LedOff				;No, leave ESC throttle cal.
 
 
 
-esc1:	.db "Calibrating ESCs",0,0
+esc1:	.db "Trottle pass-through",0,0
 
 

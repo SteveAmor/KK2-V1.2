@@ -1,37 +1,5 @@
 
 
-/*
-.def 	Counter=r17
-
-ShowPage:
-	PushAll
-	call LcdClear
-
-	lrv PixelType, 1
-	lrv FontSelector, f6x8
-
-	lrv Y1, 0
-	ldi Counter, 8
-
-sho6:	lrv X1, 0 
-	ldi xl, 22
-sho5:	lpm t, z+
-	call PrintChar
-	dec xl
-	brne sho5
-	
-	rvadd Y1, 8
-
-	dec Counter
-	brne sho6
-
-	call LcdUpdate
-	PopAll
-	ret
-
-.undef Counter
-
-*/
 
 .def TargetY		=r17
 

@@ -21,7 +21,7 @@ EeInit:
 
 	call ReadEeprom
 	adiw z, 1
-	cpi t, 0x02
+	cpi t, 0x03
 	brne eei1
 
 	ret		;Yes, return
@@ -75,7 +75,7 @@ eei8:	movw z, y
 	call StoreEeVariable16
 
 
-	ldx 40
+	ldx 100
 	ldz eeSelflevelPgain
 	call StoreEeVariable16
 
@@ -96,7 +96,7 @@ eei8:	movw z, y
 	ldz eeBattAlarmVoltage
 	call StoreEeVariable16
 
-	ldx 0
+	ldx 50
 	ldz eeServoFilter
 	call StoreEeVariable16
 
@@ -131,10 +131,6 @@ eei8:	movw z, y
 	call StoreEeVariable8
 
 	setflagtrue xl
-	ldz eeArmingType
-	call StoreEeVariable8
-
-	setflagtrue xl
 	ldz eeLinkRollPitch
 	call StoreEeVariable8
 
@@ -162,7 +158,7 @@ eei8:	movw z, y
 	ldi t, 0x73
 	call WriteEeprom
 	adiw z, 1
-	ldi t, 0x02
+	ldi t, 0x03
 	call WriteEeprom
 	adiw z, 1
 
